@@ -1,0 +1,24 @@
+{% extends 'anamneses/main.html' %} {% block content %}
+
+<div class="logo">
+  <h2>Sistema de</h2>
+  <h1>Anamnese Nuclear</h1>
+</div>
+
+{% for message in messages %}
+  {{ message }}
+{% endfor %}
+
+<div class="search-box">
+  <form action="{% url 'inicio' %}" method="GET">
+    <input
+      class="search-txt"
+      type="number"
+      name="search-bar"
+      placeholder="Digite o CNS do paciente"
+    />
+    <button type="submit" class="search-btn" formaction="{% url 'inicio' %}"><i class="fas fa-search"></i></button>
+  </form>
+</div>
+
+{% endblock content %}

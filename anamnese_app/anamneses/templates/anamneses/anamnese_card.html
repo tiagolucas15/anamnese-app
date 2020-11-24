@@ -1,0 +1,82 @@
+<div class="anamnese-info">
+    <div class="edit-btn-box">
+    {% if anamnese.pode_editar %}
+        <a class="edit-button" href="{% url 'editar_anamnese' paciente.cns anamnese.pk %}">Editar</a>
+    {% endif %}
+    </div>
+    <div class="info-label">Data: 
+    <div class="info-data">{{anamnese.data_cadastro|date}}</div>
+    </div>
+    <div class="info-label">Peso:
+    <div class="info-data">{{anamnese.peso|default_if_none:"-"}} Kg</div>
+    </div>
+    <div class="info-label">Altura:
+    <div class="info-data">{{anamnese.altura|default_if_none:"-"}} cm</div>
+    </div>
+    <div class="info-label">Cafeína:
+    <div class="info-data">{{anamnese.cafeina|default_if_none:"-"}}</div>
+    </div>
+    <div class="info-label">Asma:
+    <div class="info-data">{{anamnese.asma|default_if_none:"-"}}</div>
+    </div>
+    <div class="info-label">Tipo de exame:
+    <div class="info-data">
+        {{anamnese.tipo_exame|default_if_none:"-"}} - {{anamnese.exame_info_adicional|default_if_none:""}}
+    </div>
+    </div>
+    <div class="info-label">DUM:
+    <div class="info-data">{{anamnese.dum|default_if_none:"-"}}</div>
+    </div>
+    <div class="info-label">Motivo do exame:
+    <div class="info-data">{{anamnese.motivo_exame|default_if_none:"-"}}</div>
+    </div>
+    <div class="info-label">HDA:
+    <div class="info-data">{{anamnese.hda|default_if_none:"-"}}</div>
+    </div>
+    <div class="info-label">HPP:
+    <div class="info-data">
+        {{anamnese.hpp_risco|default_if_none:"-"}},
+        {{anamnese.hpp_dac|default_if_none:"-"}},
+        {{anamnese.hpp_comorbidades|default_if_none:"-"}}
+    </div>
+    </div>
+    <div class="info-label">Exames prévios:
+    <div class="info-data">
+        {% if anamnese.exames_previos_eco %}
+            {{anamnese.exames_previos_eco|safe}},
+        {% endif %}
+        {% if anamnese.exames_previos_te %}
+            {{anamnese.exames_previos_te|safe}},
+        {% endif %}
+        {% if anamnese.exames_previos_cat %}
+            {{anamnese.exames_previos_cat|safe}},
+        {% endif %}
+        {% if anamnese.exames_previos_cm %}
+            {{anamnese.exames_previos_cm|safe}},
+        {% endif %}
+        {% if anamnese.exames_previos_fe %}
+            {{anamnese.exames_previos_fe|safe}},
+        {% endif %}
+        {% if anamnese.exames_previos_mets %}
+            {{anamnese.exames_previos_mets|safe}},
+        {% endif %}
+        {% if anamnese.exames_previos_tce %}
+            {{anamnese.exames_previos_tce|safe}}
+        {% endif %}
+    </div>
+    </div>
+    <div class="info-label">Medicamentos:
+    <div class="info-data">{{anamnese.medicamentos|safe|default_if_none:"-"}}</div>
+    </div>
+    <div class="info-label">Observações:
+    <div class="info-data">{{anamnese.observacoes|default_if_none:"-"}}</div>
+    </div>
+        <div class="info-label">Médico: 
+    <div class="info-data">{{anamnese.medico|default_if_none:"-"}}</div>
+    </div>
+    {% if anamnese.medico_assistente %}
+    <div class="info-label">Médico Assistente: 
+    <div class="info-data">{{anamnese.medico_assistente|default_if_none:"-"}}</div>
+    </div>
+    {% endif %}
+</div>

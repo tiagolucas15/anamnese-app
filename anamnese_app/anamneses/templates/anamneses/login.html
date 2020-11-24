@@ -1,0 +1,28 @@
+{% extends 'anamneses/main.html' %} {% block content %}
+
+<div class="content login">
+  <h2>Login</h2>
+  <div class="form">
+    <form class="login-form" action="{% url 'login' %}" method="POST">
+    {%csrf_token %}
+    {% comment %} {{ form }} {% endcomment %}
+      <div class="name-section">
+        {% comment %} <input type="number" name="{{ form.crm }}" autocomplete="off" required /> {% endcomment %}
+        {{ form.crm }}
+        <label for="username" class="label-name">
+          <span class="content-name">CRM</span>
+        </label>
+      </div>
+      <div class="name-section">
+        {{ form.senha }}
+        {% comment %} <input type="password" name="{{ form.senha }}" autocomplete="off" required /> {% endcomment %}
+        <label for="password" class="label-name">
+          <span class="content-name">Senha</span>
+        </label>
+      </div>
+      <button type="submit" class="login-submit" formaction="{% url 'login'%}">Salvar</button>
+    </form>
+    {{ form.errors }}
+  </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,258 @@
+{% extends 'anamneses/main.html' %} {% load widget_tweaks %}
+{% block content %}
+
+{% for message in messages %}
+  {{ message }}
+{% endfor %}
+
+<div class="content">
+  {% include 'anamneses/paciente_info.html' %}
+    <h2>{{ title }}</h2>
+  <form action="" method="POST">
+
+    {% csrf_token %}
+    {{ formset.management_form }}
+
+    {% for form in formset %}
+      <div class="name-section"> 
+        {{ form.medico_assistente.label}}
+        {{ form.medico_assistente|add_class:"label-not-required" }}
+      </div>
+      <div class="name-section">
+        {{ form.medico.label}}
+        {{ form.medico|add_class:"label-not-required" }}
+      </div>
+      <div class="name-section">
+        {{ form.peso.label}}
+        {{ form.peso|add_class:"label-not-required" }}
+      </div>
+      <div class="name-section">
+        {{ form.altura.label}}
+        {{ form.altura|add_class:"label-not-required" }}
+      </div>
+      <div class="label-name">
+        {{ form.alergia.label }}
+        {{ form.alergia }}
+      </div>
+      <div class="name-section">
+        {{ form.cafeina.label}}
+        {{ form.cafeina|add_class:"label-not-required" }}
+      </div>
+      <div class="name-section">
+        {{ form.asma.label}}
+        {{ form.asma|add_class:"label-not-required" }}
+      </div>
+      <div class="name-section"> 
+        {{ form.tipo_exame.label}}
+        {{ form.tipo_exame|add_class:"label-not-required" }}
+      </div>
+      <div class="name-section"> 
+        {{ form.cintilografia_adicional.label}}
+        {{ form.cintilografia_adicional|add_class:"label-not-required" }}
+      </div>
+      <div class="name-section"> 
+        {{ form.viabilidade_adicional.label}}
+        {{ form.viabilidade_adicional|add_class:"label-not-required" }}
+      </div>
+      <div class="name-section"> 
+        {{ form.dum.label}}
+        {{ form.dum|add_class:"label-not-required" }}
+      </div>
+      <div class="form-group">
+        <label class="check-label">{{ form.motivo_exame.label}}</label>
+        {% comment %} <div class="selectgroup selectgroup-pills"> {% endcomment %}
+        <div class="">
+        {% for value, text in form.motivo_exame.field.choices %}
+          {% comment %} <div class="ui slider checkbox"> {% endcomment %}
+          <div class="container-check">
+            <label>{{ text }}
+            <input id="id_motivo_exame_{{ forloop.counter0 }}" name="anamnese_set-0-motivo_exame" type="checkbox" value="{{ value }}"{% if value in checked_motivo_exame %} checked="checked"{% endif %}>
+            <span class="checkmark"></span>
+            </label>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="form-group">
+        <label class="check-label">{{ form.hda.label|upper}}</label>
+        <div class="">
+        {% for value, text in form.hda.field.choices %}
+          <div class="container-check">
+            <label>{{ text }}
+            <input id="id_hda_{{ forloop.counter0 }}" name="anamnese_set-0-hda" type="checkbox" value="{{ value }}"{% if value in checked_hda %} checked="checked"{% endif %}>
+            <span class="checkmark"></span>
+            </label>
+          </div>
+        {% endfor %}
+      </div>
+      <p>
+      <label class="check-label">HPP</label>
+      <div class="form-group">
+        <label class="check-sub-label">{{ form.hpp_risco.label }}<hr></label>
+        <div class="">
+        {% for value, text in form.hpp_risco.field.choices %}
+          <div class="container-check">
+            <label>{{ text }}
+            <input id="id_hpp_risco_{{ forloop.counter0 }}" name="anamnese_set-0-hpp_risco" type="checkbox" value="{{ value }}"{% if value in checked_hpp_risco %} checked="checked"{% endif %}>
+            <span class="checkmark"></span>
+            </label>
+          </div>
+        {% endfor %}
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="check-sub-label">{{ form.hpp_dac.label }}<hr></label>
+        <div class="">
+        {% for value, text in form.hpp_dac.field.choices %}
+          <div class="container-check">
+            <label>{{ text }}
+            <input id="id_hpp_dac_{{ forloop.counter0 }}" name="anamnese_set-0-hpp_dac" type="checkbox" value="{{ value }}"{% if value in checked_hpp_dac %} checked="checked"{% endif %}>
+            <span class="checkmark"></span>
+            </label>
+          </div>
+        {% endfor %}
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="check-sub-label">{{ form.hpp_comorbidades.label }}<hr></label>
+        <div class="">
+        {% for value, text in form.hpp_comorbidades.field.choices %}
+          <div class="container-check">
+            <label>{{ text }}
+            <input id="id_hpp_comorbidades_{{ forloop.counter0 }}" name="anamnese_set-0-hpp_comorbidades" type="checkbox" value="{{ value }}"{% if value in checked_hpp_comorbidades %} checked="checked"{% endif %}>
+            <span class="checkmark"></span>
+            </label>
+          </div>
+        {% endfor %}
+        </div>
+      </div>
+      <p>
+      <label class="check-label">Exames prévios</label>
+      <div class="form-group">
+        <label class="check-sub-label">{{ form.exames_previos_eco.label }}<hr></label>
+        <div class="">
+        {% for value, text in form.exames_previos_eco.field.choices %}
+          <div class="container-check">
+            <label>{{ text }}
+            <input id="id_exames_previos_eco_{{ forloop.counter0 }}" name="anamnese_set-0-exames_previos_eco" type="checkbox" value="{{ value }}"{% if value in checked_exames_previos_eco %} checked="checked"{% endif %}>
+            <span class="checkmark"></span>
+            </label>
+          </div>
+        {% endfor %}
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="check-sub-label">{{ form.exames_previos_te.label }}<hr></label>
+        <div class="">
+        {% for value, text in form.exames_previos_te.field.choices %}
+          <div class="container-check">
+            <label>{{ text }}
+            <input id="id_exames_previos_te_{{ forloop.counter0 }}" name="anamnese_set-0-exames_previos_te" type="checkbox" value="{{ value }}"{% if value in checked_exames_previos_te %} checked="checked"{% endif %}>
+            <span class="checkmark"></span>
+            </label>
+          </div>
+        {% endfor %}
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="check-sub-label">{{ form.exames_previos_cat.label }}<hr></label>
+        <div class="">
+        {% for value, text in form.exames_previos_cat.field.choices %}
+          <div class="container-check">
+            <label>{{ text }}
+            <input id="id_exames_previos_cat_{{ forloop.counter0 }}" name="anamnese_set-0-exames_previos_cat" type="checkbox" value="{{ value }}"{% if value in checked_exames_previos_cat %} checked="checked"{% endif %}>
+            <span class="checkmark"></span>
+            </label>
+          </div>
+        {% endfor %}
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="check-sub-label">{{ form.exames_previos_cm.label }}<hr></label>
+        <div class="">
+        {% for value, text in form.exames_previos_cm.field.choices %}
+          <div class="container-check">
+            <label>{{ text }}
+            <input id="id_exames_previos_cm_{{ forloop.counter0 }}" name="anamnese_set-0-exames_previos_cm" type="checkbox" value="{{ value }}"{% if value in checked_exames_previos_cm %} checked="checked"{% endif %}>
+            <span class="checkmark"></span>
+            </label>
+          </div>
+        {% endfor %}
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="check-sub-label">{{ form.exames_previos_fe.label }}<hr></label>
+        <div class="">
+        {% for value, text in form.exames_previos_fe.field.choices %}
+          <div class="container-check">
+            <label>{{ text }}
+            <input id="id_exames_previos_fe_{{ forloop.counter0 }}" name="anamnese_set-0-exames_previos_fe" type="checkbox" value="{{ value }}"{% if value in checked_exames_previos_fe %} checked="checked"{% endif %}>
+            <span class="checkmark"></span>
+            </label>
+          </div>
+        {% endfor %}
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="check-sub-label">{{ form.exames_previos_mets.label }}<hr></label>
+        <div class="">
+        {% for value, text in form.exames_previos_mets.field.choices %}
+          <div class="container-check">
+            <label>{{ text|safe }}
+            <input id="id_exames_previos_mets_{{ forloop.counter0 }}" name="anamnese_set-0-exames_previos_mets" type="checkbox" value="{{ value }}"{% if value in checked_exames_previos_mets %} checked="checked"{% endif %}>
+            <span class="checkmark"></span>
+            </label>
+          </div>
+        {% endfor %}
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="check-sub-label">{{ form.exames_previos_tce.label }}<hr></label>
+        <div class="">
+        {% for value, text in form.exames_previos_tce.field.choices %}
+          <div class="container-check">
+            <label>{{ text }}
+            <input id="id_exames_previos_tce_{{ forloop.counter0 }}" name="anamnese_set-0-exames_previos_tce" type="checkbox" value="{{ value }}"{% if value in checked_exames_previos_tce %} checked="checked"{% endif %}>
+            <span class="checkmark"></span>
+            </label>
+          </div>
+        {% endfor %}
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="check-label">{{form.medicamentos.label}}</label>
+        <div class="">
+        {% for value, text in form.medicamentos.field.choices %}
+          <div class="container-check">
+            <label>{{ text|safe }}
+            <input id="id_medicamentos_{{ forloop.counter0 }}" name="anamnese_set-0-medicamentos" type="checkbox" value="{{ value }}"{% if value in checked_medicamentos %} checked="checked"{% endif %}>
+            <span class="checkmark"></span>
+            </label>
+          </div>
+        {% endfor %}
+        </div>
+      </div>
+      <p>
+      {{ form.observacoes.label}}
+      <p>
+      {{ form.observacoes}}
+      {{ form.id }}
+    {% endfor %}
+    <p>
+    <button type="submit" class="form-submit">Salvar</button>
+
+  </form>
+</div>
+
+<script>
+function showCint() {
+  document.getElementById("cint").style.display = "flex";
+  document.getElementById("pesq").style.display = "none";
+}
+
+function showPesq() {
+  document.getElementById("pesq").style.display = "flex";
+  document.getElementById("cint").style.display = "none";
+}
+</script>
+
+{% endblock content %}

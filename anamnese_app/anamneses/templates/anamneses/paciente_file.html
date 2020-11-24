@@ -1,0 +1,23 @@
+{% extends 'anamneses/main.html' %} {% block content %}
+
+{% for message in messages %}
+  {{ message }}
+{% endfor %}
+
+<div class="content">
+  {% include 'anamneses/paciente_info.html' with file=True%}
+  <class="container-info">
+  {% if anamnese_atual%}
+    <h5>Atual</h5>
+      {% include 'anamneses/anamnese_card.html' with anamnese=anamnese_atual %}
+    <hr>
+  {% endif %}
+  {% if anamneses %}
+    <h5>Histórico</h5>
+    {% for anamnese in anamneses %}
+      {% include 'anamneses/anamnese_card.html' %}
+    {% endfor %}
+  {% endif %}
+</div>
+
+{% endblock content %}

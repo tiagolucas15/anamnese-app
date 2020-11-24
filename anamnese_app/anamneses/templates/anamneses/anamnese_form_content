@@ -1,0 +1,479 @@
+    {% for field in formset %}
+    <div class="name-section">
+      {% comment %} <input type="text" name="medico_nuclear" autocomplete="off"
+        onkeyup="this.setAttribute('value', this.value);" /> {% endcomment %}
+      {% comment %} {{ field.medico|add_class:"label-not-required" }} {% endcomment %}
+      {{ field.medico }}
+      <label for="medico_nuclear" class="label-not-required">
+        <span class="content-not-required">Médico Nuclear</span>
+      </label>
+    </div>
+    <div class="name-section">
+      {% comment %} <input type="text" name="medico_assistente" autocomplete="off" {% endcomment %}
+        {% comment %} onkeyup="this.setAttribute('value', this.value);" /> {% endcomment %}
+      {{ field.medico_assistente }}
+      <label for="medico_assistente" class="label-not-required">
+        <span class="content-not-required">Médico Assistente</span>
+      </label>
+    </div>
+    <div class="container-column">
+      <div class="name-section">
+        {% comment %} <input type="number" name="peso_paciente" autocomplete="off"  {% endcomment %}
+        {% comment %} onkeyup="this.setAttribute('value', this.value);" /> {% endcomment %}
+        {{ field.peso }}
+        <label for="peso_paciente" class="label-not-required">
+          <span class="content-not-required">Peso (Kg)</span>
+        </label>
+      </div>
+      <div class="name-section">
+        {% comment %} <input type="number" name="altura_paciente" autocomplete="off"  {% endcomment %}
+        {% comment %} onkeyup="this.setAttribute('value', this.value);" /> {% endcomment %}
+        {{ field.altura }}
+        <label for="altura_paciente" class="label-not-required">
+          <span class="content-not-required">Altura (cm)</span>
+        </label>
+      </div>
+    </div>
+    <div class="container-textarea">
+      <label for="alergia">
+        <span>Alergias</span>
+      </label>
+      {{ field.alergia|attr:"rows:1" }}
+    </div>
+    
+    <div class="container-radio-column">
+      <label class="radio-label">Cafeína</label>
+      <div class="container-radio">
+        <input type="radio" name="cafeina" id="cafeina-sim" /><label for="cafeina-sim">Sim</label>
+        <input type="radio" name="cafeina" id="cafeina-não" /><label for="cafeina-não">Não</label>
+      </div>
+    </div>
+    <div class="container-radio-column">
+      <label class="radio-label">Asma</label>
+      <div class="container-radio">
+        <input type="radio" name="asma" id="asma-sim" /><label for="asma-sim">Sim</label>
+        <input type="radio" name="asma" id="asma-não" /><label for="asma-não">Não</label>
+      </div>
+    </div>
+    <label class="radio-label">Tipo de exame</label>
+    <div class="container-radio-column-double">
+      <div class="container-radio-column">
+        <div class="container-radio">
+          <input type="radio" name="exame" id="exame-cint" onclick="showCint();" /><label
+            for="exame-cint">Cintilografia Miocárdica</label>
+          <input type="radio" name="exame" id="exame-pesq" onclick="showPesq();" /><label for="exame-pesq">Pesquisa
+            de Viabilidade</label>
+        </div>
+      </div>
+      <div class="container-radio-column-double">
+        <div class="optional-radio" id="cint">
+          <div class="container-radio">
+            <input type="radio" name="cint" id="cint-1" /><label for="cint-1">Protocolo de 1 dia</label>
+            <input type="radio" name="cint" id="cint-2" /><label for="cint-2">Protocolo de 2 dias</label>
+          </div>
+        </div>
+      </div>
+      <div class="container-radio-column-double">
+        <div class="optional-radio" id="pesq">
+          <div class="container-radio">
+            <input type="radio" name="pesq" id="pesq-1" /><label for="pesq-1">Rep/Redist T</label>
+            <input type="radio" name="pesq" id="pesq-2" /><label for="pesq-2">Est/Redist/Redist T</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="name-section">
+      <input type="text" name="dum_paciente" onfocus="(this.type='date')" onblur="(this.type='text')"/>
+      <label for="dum_paciente" class="label-not-required">
+        <span class="content-not-required">DUM</span>
+      </label>
+    </div>
+    <label class="check-label">Motivo de exame</label>
+    <div class="container-radio-column">
+      <div class="container-checks">
+        <label class="container-check">Dor toráxica
+          <input type="checkbox" />
+          <span class="checkmark"></span>
+        </label>
+        <label class="container-check">pós-SCA
+          <input type="checkbox" />
+          <span class="checkmark"></span>
+        </label>
+        <label class="container-check">Alteração exame
+          <input type="checkbox" />
+          <span class="checkmark"></span>
+        </label>
+        <label class="container-check">Equiv. anginoso
+          <input type="checkbox" />
+          <span class="checkmark"></span>
+        </label>
+        <label class="container-check">pós-CRVM
+          <input type="checkbox" />
+          <span class="checkmark"></span>
+        </label>
+        <label class="container-check">Lesão coronária
+          <input type="checkbox" />
+          <span class="checkmark"></span>
+        </label>
+      </div>
+      <div class="container-checks">
+        <label class="container-check">Arritmia
+          <input type="checkbox" />
+          <span class="checkmark"></span>
+        </label>
+        <label class="container-check">pós-PTCA
+          <input type="checkbox" />
+          <span class="checkmark"></span>
+        </label>
+        <label class="container-check">pós-CRVM
+          <input type="checkbox" />
+          <span class="checkmark"></span>
+        </label>
+        <label class="container-check">Lesão coronária
+          <input type="checkbox" />
+          <span class="checkmark"></span>
+        </label>
+        <label class="container-check">Arritmia
+          <input type="checkbox" />
+          <span class="checkmark"></span>
+        </label>
+        <label class="container-check">pós-PTCA
+          <input type="checkbox" />
+          <span class="checkmark"></span>
+        </label>
+      </div>
+      <div class="container-checks">
+        <label class="container-check">ICC
+          <input type="checkbox" />
+          <span class="checkmark"></span>
+        </label>
+        <label class="container-check">Síncope
+          <input type="checkbox" />
+          <span class="checkmark"></span>
+        </label>
+        <label class="container-check">Risco cirúrgico
+          <input type="checkbox" />
+          <span class="checkmark"></span>
+        </label>
+        <label class="container-check">Outro
+          <input type="checkbox" />
+          <span class="checkmark"></span>
+        </label>
+        </label>
+      </div>
+    </div>
+    <label class="check-label">HDA</label>
+    <div class="container-radio-column">
+      <div class="container-checks">
+        <label class="container-check">Assintomático
+          <input type="checkbox" />
+          <span class="checkmark"></span>
+        </label>
+        <label class="container-check">Cansaço
+          <input type="checkbox" />
+          <span class="checkmark"></span>
+        </label>
+        <label class="container-check">Síncope
+          <input type="checkbox" />
+          <span class="checkmark"></span>
+        </label>
+      </div>
+      <div class="container-checks">
+        <label class="container-check">Dor toráxica típica
+          <input type="checkbox" />
+          <span class="checkmark"></span>
+        </label>
+        <label class="container-check">Dispnéia aos esforços
+          <input type="checkbox" />
+          <span class="checkmark"></span>
+        </label>
+        <label class="container-check">Palpitações
+          <input type="checkbox" />
+          <span class="checkmark"></span>
+        </label>
+      </div>
+      <div class="container-checks">
+        <label class="container-check">Dor toráxica atípica
+          <input type="checkbox" />
+          <span class="checkmark"></span>
+        </label>
+        <label class="container-check">Dispnéia de repouso
+          <input type="checkbox" />
+          <span class="checkmark"></span>
+        </label>
+        <label class="container-check">Outro
+          <input type="checkbox" />
+          <span class="checkmark"></span>
+        </label>
+      </div>
+    </div>
+    <label class="check-label">HPP</label>
+    <div class="container-radio-column">
+      <div class="container-radio-column-double">
+        <label class="check-sub-label">Fatores de risco
+          <hr></label>
+        <div class="container-checks">
+          <label class="container-check">HAS
+            <input type="checkbox" />
+            <span class="checkmark"></span>
+          </label>
+          <label class="container-check">D.M.
+            <input type="checkbox" />
+            <span class="checkmark"></span>
+          </label>
+          <label class="container-check">Tabagismo
+            <input type="checkbox" />
+            <span class="checkmark"></span>
+          </label>
+          <label class="container-check">Ex-tabagismo
+            <input type="checkbox" />
+            <span class="checkmark"></span>
+          </label>
+          <label class="container-check">Obesidade
+            <input type="checkbox" />
+            <span class="checkmark"></span>
+          </label>
+          <label class="container-check">Dislipidemia
+            <input type="checkbox" />
+            <span class="checkmark"></span>
+          </label>
+          <label class="container-check">HF
+            <input type="checkbox" />
+            <span class="checkmark"></span>
+          </label>
+          <label class="container-check">Menopausa
+            <input type="checkbox" />
+            <span class="checkmark"></span>
+          </label>
+        </div>
+      </div>
+      <div class="container-radio-column-double">
+        <label class="check-sub-label">DAC prévia
+          <hr></label>
+        <div class="container-checks">
+          <label class="container-check">AM
+            <input type="checkbox" />
+            <span class="checkmark"></span>
+          </label>
+          <label class="container-check">CRVM
+            <input type="checkbox" />
+            <span class="checkmark"></span>
+          </label>
+          <label class="container-check">PTCA
+            <input type="checkbox" />
+            <span class="checkmark"></span>
+          </label>
+          <label class="container-check">CAT alterado
+            <input type="checkbox" />
+            <span class="checkmark"></span>
+          </label>
+        </div>
+      </div>
+      <div class="container-radio-column-double">
+        <label class="check-sub-label">Comorbidades
+          <hr></label>
+        <div class="container-checks">
+          <label class="container-check">AVC
+            <input type="checkbox" />
+            <span class="checkmark"></span>
+          </label>
+          <label class="container-check">IRC
+            <input type="checkbox" />
+            <span class="checkmark"></span>
+          </label>
+          <label class="container-check">AAo
+            <input type="checkbox" />
+            <span class="checkmark"></span>
+          </label>
+          <label class="container-check">Doença Vascular
+            <input type="checkbox" />
+            <span class="checkmark"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+    <label class="check-label">Exames prévios</label>
+    <div class="container-radio-column dual">
+      <div class="container-radio-column-double">
+        <label class="check-sub-label">ECO
+          <hr></label>
+        <div class="container-checks">
+          <label class="container-check">Normal
+            <input type="checkbox" />
+            <span class="checkmark"></span>
+          </label>
+        </div>
+      </div>
+      <div class="container-radio-column-double">
+        <label class="check-sub-label">TE
+          <hr></label>
+        <div class="container-checks">
+          <label class="container-check">Normal
+            <input type="checkbox" />
+            <span class="checkmark"></span>
+          </label>
+        </div>
+      </div>
+      <div class="container-radio-column-double">
+        <label class="check-sub-label">CAT
+          <hr></label>
+        <div class="container-checks">
+          <label class="container-check">Normal
+            <input type="checkbox" />
+            <span class="checkmark"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="container-radio-column">
+      <div class="container-radio-column-double">
+        <label class="check-sub-label">CM
+          <hr></label>
+        <div class="container-checks">
+          <label class="container-check">Normal
+            <input type="checkbox" />
+            <span class="checkmark"></span>
+          </label>
+          <label class="container-check">Isquemia
+            <input type="checkbox" />
+            <span class="checkmark"></span>
+          </label>
+          <label class="container-check">Fibrose
+            <input type="checkbox" />
+            <span class="checkmark"></span>
+          </label>
+          <label class="container-check">Isq/fib
+            <input type="checkbox" />
+            <span class="checkmark"></span>
+          </label>
+          <label class="container-check">Gated alt.
+            <input type="checkbox" />
+            <span class="checkmark"></span>
+          </label>
+        </div>
+      </div>
+      <div class="container-radio-column-double">
+        <label class="check-sub-label">FE
+          <hr></label>
+        <div class="container-checks">
+          <label class="container-check">Alt. segmentar
+            <input type="checkbox" />
+            <span class="checkmark"></span>
+          </label>
+          <label class="container-check">Disf. sistólica
+            <input type="checkbox" />
+            <span class="checkmark"></span>
+          </label>
+          <label class="container-check">Disf. diastólica
+            <input type="checkbox" />
+            <span class="checkmark"></span>
+          </label>
+        </div>
+      </div>
+      <div class="container-radio-column-double">
+        <label class="check-sub-label">METs
+          <hr></label>
+        <div class="container-checks">
+          <label class="container-check">ECG
+            <input type="checkbox" />
+            <span class="checkmark"></span>
+          </label>
+          <label class="container-check">Dor
+            <input type="checkbox" />
+            <span class="checkmark"></span>
+          </label>
+          <label class="container-check">Arritmia
+            <input type="checkbox" />
+            <span class="checkmark"></span>
+          </label>
+          <label class="container-check">PA
+            <input type="checkbox" />
+            <span class="checkmark"></span>
+          </label>
+        </div>
+      </div>
+      <div class="container-radio-column-double">
+        <label class="check-sub-label">TCE
+          <hr></label>
+        <div class="container-checks">
+          <label class="container-check">DA
+            <input type="checkbox" />
+            <span class="checkmark"></span>
+          </label>
+          <label class="container-check">CX
+            <input type="checkbox" />
+            <span class="checkmark"></span>
+          </label>
+          <label class="container-check">CD
+            <input type="checkbox" />
+            <span class="checkmark"></span>
+          </label>
+          <label class="container-check">Saf
+            <input type="checkbox" />
+            <span class="checkmark"></span>
+          </label>
+          <label class="container-check">Mam
+            <input type="checkbox" />
+            <span class="checkmark"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+    <label class="check-label">Medicamentos</label>
+    <div class="container-radio-column">
+      <div class="container-checks">
+        <label class="container-check">Bloq. Cálcio
+          <input type="checkbox" />
+          <span class="checkmark"></span>
+        </label>
+        <label class="container-check">AAS
+          <input type="checkbox" />
+          <span class="checkmark"></span>
+        </label>
+        <label class="container-check">Nitrato
+          <input type="checkbox" />
+          <span class="checkmark"></span>
+        </label>
+      </div>
+      <div class="container-checks">
+        <label class="container-check">Estatina
+          <input type="checkbox" />
+          <span class="checkmark"></span>
+        </label>
+        <label class="container-check">BRA
+          <input type="checkbox" />
+          <span class="checkmark"></span>
+        </label>
+        <label class="container-check">Clopido.rel
+          <input type="checkbox" />
+          <span class="checkmark"></span>
+        </label>
+      </div>
+      <div class="container-checks">
+        <label class="container-check">Beta bloqueador
+          <input type="checkbox" />
+          <span class="checkmark"></span>
+        </label>
+        <label class="container-check">Diurético
+          <input type="checkbox" />
+          <span class="checkmark"></span>
+        </label>
+        <label class="container-check">IECA
+          <input type="checkbox" />
+          <span class="checkmark"></span>
+        </label>
+        <label class="container-check">Outro
+          <input type="checkbox" />
+          <span class="checkmark"></span>
+        </label>
+      </div>
+    </div>
+    <div class="container-textarea">
+      <label for="observacoes">
+        <span>Observações</span>
+      </label>
+      {{ field.observacoes|attr:"rows:1" }}
+      {% comment %} <textarea rows="1"></textarea> {% endcomment %}
+    </div>
+    <button type="submit" class="form-submit">Salvar</button>
+  {% endfor %}

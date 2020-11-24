@@ -1,0 +1,81 @@
+{% extends 'anamneses/main.html' %} {% block content %}{% load widget_tweaks %}
+
+{% for message in messages %}
+  {{ message }}
+{% endfor %}
+
+<div class="content">
+  <h2>{{ title }}</h2>
+  <form action="" method="POST">
+    {% csrf_token%} 
+    {% for field in form %}
+      {% comment %} <div class="name-section"> {% endcomment %}
+        {{ field.label }}
+        <p>
+        {{ field }}
+        <p>
+      {% comment %} </div> {% endcomment %}
+    {% endfor %}
+    <input type="submit" name="submit" />
+  </form>
+</div>
+{% endblock %} {% comment %}
+<div class="content">
+  <form action="" method="POST">
+    {% csrf_token %} {% for hidden in form.hidden_fields %} {{ hidden }} {%
+    endfor %}
+
+    <h2>Cadatrar Paciente</h2>
+    {% for field in form.visible_fields %}
+    <div class="name-section">
+      <input
+        type="text"
+        name="{{ field.id_for_label }}"
+        autocomplete="off"
+        required
+      />
+      <label for="{{ field.id_for_label }}" class="label-name">
+        <span class="content-name">{{ field.label}}</span>
+        {% for error in field.errors %}
+        <span class="help-block">{{ error }}</span>
+        {% endfor %}
+      </label>
+    </div>
+    {% endfor %}
+
+    <input type="submit" name="submit" />
+  </form>
+</div>
+{% endblock content %} {% endcomment %} {% comment %}
+<form
+  action="paciente_file.html"
+  onSubmit="alert('Paciente cadastrado com sucesso!');"
+>
+  <h2>Cadatrar Paciente</h2>
+  <div class="name-section">
+    <input type="text" name="nome_paciente" autocomplete="off" required />
+    <label for="nome_paciente" class="label-name">
+      <span class="content-name">Nome do paciente</span>
+    </label>
+  </div>
+  <div class="name-section">
+    <input type="number" name="cns_paciente" autocomplete="off" required />
+    <label for="cns_paciente" class="label-name">
+      <span class="content-name">CNS</span>
+    </label>
+  </div>
+  <div class="name-section">
+    <input
+      type="text"
+      name="nascimento_paciente"
+      onfocus="(this.type='date')"
+      onblur="(this.type='text')"
+      required
+    />
+    <label for="nascimento_paciente" class="label-name">
+      <span class="content-name">Data de Nascimento</span>
+    </label>
+  </div>
+  <button type="submit" class="form-submit">Salvar</button>
+</form>
+{% endcomment %}

@@ -1,0 +1,16 @@
+<div class="edit-btn-box">
+    {% if file %}
+        <a class="edit-button" href="{% url 'editar_paciente' paciente.cns %}">Editar</a>
+    {% endif %}
+    <h5>Paciente:</h5>
+    {% if not file %}
+        <a href="{% url 'paciente' paciente.cns %}"><h3 class="paciente-nome">{{ paciente.nome }}</h3></a>
+    {% else %}
+        <h3>{{ paciente.nome }}</h3>
+    {% endif %}
+</div>
+<br>
+<div class="container-info primary">
+    <div class="info-label">CNS: {{ paciente.cns }}</div>
+    <div class="info-label">Data de Nascimento: {{ paciente.data_nascimento|date }}</div>
+</div>
