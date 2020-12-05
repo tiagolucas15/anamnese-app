@@ -2,6 +2,7 @@
     <div class="edit-btn-box">
     {% if anamnese.pode_editar %}
         <a class="edit-button" href="{% url 'editar_anamnese' paciente.cns anamnese.pk %}">Editar</a>
+        <h3>Esta anamnese não pode ser editada.</h3>
     {% endif %}
     </div>
     <div class="info-label">Data: 
@@ -28,45 +29,66 @@
     <div class="info-data">{{anamnese.dum|default_if_none:"-"}}</div>
     </div>
     <div class="info-label">Motivo do exame:
-    <div class="info-data">{{anamnese.motivo_exame|default_if_none:"-"}}</div>
+    <div class="info-data">
+        {{anamnese.motivo_exame|default_if_none:"-"}}
+        {% if anamnese.motivo_exame_outros %}
+            , {{anamnese.motivo_exame_outros}}
+        {% endif %}
+    </div>
     </div>
     <div class="info-label">HDA:
-    <div class="info-data">{{anamnese.hda|default_if_none:"-"}}</div>
+    <div class="info-data">
+        {{anamnese.hda|default_if_none:"-"}}
+        {% if anamnese.hda_outros %}
+            , {{anamnese.hda_outros}}
+        {% endif %}
+    </div>
     </div>
     <div class="info-label">HPP:
     <div class="info-data">
         {{anamnese.hpp_risco|default_if_none:"-"}},
         {{anamnese.hpp_dac|default_if_none:"-"}},
         {{anamnese.hpp_comorbidades|default_if_none:"-"}}
+        {% if anamnese.hpp_outros %}
+            , {{anamnese.hpp_outros}}
+        {% endif %}
     </div>
     </div>
     <div class="info-label">Exames prévios:
     <div class="info-data">
         {% if anamnese.exames_previos_eco %}
-            {{anamnese.exames_previos_eco|safe}},
+            <p>ECO: {{anamnese.exames_previos_eco|safe}}
+            {% if anamnese.exames_previos_fe %}
+                <p>FE: {{anamnese.exames_previos_fe|safe}}
+            {% endif %}
         {% endif %}
         {% if anamnese.exames_previos_te %}
-            {{anamnese.exames_previos_te|safe}},
+            <p>TE: {{anamnese.exames_previos_te|safe}}
+            {% if anamnese.exames_previos_mets %}
+                <p>METs: {{anamnese.exames_previos_mets|safe}}
+            {% endif %}
         {% endif %}
         {% if anamnese.exames_previos_cat %}
-            {{anamnese.exames_previos_cat|safe}},
+            <p>CAT: {{anamnese.exames_previos_cat|safe}}
+            {% if anamnese.exames_previos_tce %}
+                <p>TCE: {{anamnese.exames_previos_tce|safe}}
+            {% endif %}
         {% endif %}
         {% if anamnese.exames_previos_cm %}
-            {{anamnese.exames_previos_cm|safe}},
+            <p>CM: {{anamnese.exames_previos_cm|safe}}
         {% endif %}
-        {% if anamnese.exames_previos_fe %}
-            {{anamnese.exames_previos_fe|safe}},
-        {% endif %}
-        {% if anamnese.exames_previos_mets %}
-            {{anamnese.exames_previos_mets|safe}},
-        {% endif %}
-        {% if anamnese.exames_previos_tce %}
-            {{anamnese.exames_previos_tce|safe}}
+        {% if anamnese.exames_previos_outros %}
+            <p>Outros: {{anamnese.exames_previos_outros}}
         {% endif %}
     </div>
     </div>
     <div class="info-label">Medicamentos:
-    <div class="info-data">{{anamnese.medicamentos|safe|default_if_none:"-"}}</div>
+        <div class="info-data">
+            {{anamnese.medicamentos|safe|default_if_none:"-"}}
+            {% if anamnese.medicamentos_outros %}
+                , {{anamnese.medicamentos_outros}}
+            {% endif %}
+        </div>
     </div>
     <div class="info-label">Observações:
     <div class="info-data">{{anamnese.observacoes|default_if_none:"-"}}</div>

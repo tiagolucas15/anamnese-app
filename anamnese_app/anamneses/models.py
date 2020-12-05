@@ -88,10 +88,22 @@ class Anamnese(models.Model):
         choices=MOTIVO_EXAME,
         verbose_name='Motivo de exame',
     )
+    motivo_exame_outros = models.CharField(
+        max_length=255,
+        null=True,
+        blank=True,
+        verbose_name='Outros'
+    )
     hda = MultiSelectField(
         null=True,
         blank=True,
         choices=HDA,
+    )
+    hda_outros = models.CharField(
+        max_length=255,
+        null=True,
+        blank=True,
+        verbose_name='Outros'
     )
     hpp_risco = MultiSelectField(
         null=True,
@@ -111,11 +123,23 @@ class Anamnese(models.Model):
         choices=HPP_COMORBIDADES,
         verbose_name='Comorbidades',
     )
+    hpp_outros = models.CharField(
+        max_length=255,
+        null=True,
+        blank=True,
+        verbose_name='Outros'
+    )
     exames_previos_eco = MultiSelectField(
         null=True,
         blank=True,
         choices=EXAMES_PREVIOS_ECO,
         verbose_name='ECO',
+    )
+    exames_previos_fe = models.CharField(
+        max_length=255,
+        null=True,
+        blank=True,
+        verbose_name='FE'
     )
     exames_previos_te = MultiSelectField(
         null=True,
@@ -123,11 +147,23 @@ class Anamnese(models.Model):
         choices=EXAMES_PREVIOS_TE,
         verbose_name='TE',
     )
+    exames_previos_mets = models.CharField(
+        max_length=255,
+        null=True,
+        blank=True,
+        verbose_name='METs',
+    )
     exames_previos_cat = MultiSelectField(
         null=True,
         blank=True,
         choices=EXAMES_PREVIOS_CAT,
         verbose_name='CAT',
+    )
+    exames_previos_tce = models.CharField(
+        max_length=255,
+        null=True,
+        blank=True,
+        verbose_name='TCE',
     )
     exames_previos_cm = MultiSelectField(
         null=True,
@@ -135,28 +171,22 @@ class Anamnese(models.Model):
         choices=EXAMES_PREVIOS_CM,
         verbose_name='CM',
     )
-    exames_previos_fe = MultiSelectField(
+    exames_previos_outros = models.CharField(
+        max_length=255,
         null=True,
         blank=True,
-        choices=EXAMES_PREVIOS_FE,
-        verbose_name='FE',
-    )
-    exames_previos_mets = MultiSelectField(
-        null=True,
-        blank=True,
-        choices=EXAMES_PREVIOS_METS,
-        verbose_name='METs',
-    )
-    exames_previos_tce = MultiSelectField(
-        null=True,
-        blank=True,
-        choices=EXAMES_PREVIOS_TCE,
-        verbose_name='TCE',
+        verbose_name='Outros'
     )
     medicamentos = MultiSelectField(
         null=True,
         blank=True,
         choices=MEDICAMENTOS,
+    )
+    medicamentos_outros = models.CharField(
+        max_length=255,
+        null=True,
+        blank=True,
+        verbose_name='Outros'
     )
     observacoes = models.TextField(null=True, blank=True)
 

@@ -65,14 +65,26 @@ HPP_COMORBIDADES = (
 
 EXAMES_PREVIOS_ECO = (
     ('normal', 'Normal'),
+    ('alt_segmentar', 'Alt. Segmentar'),
+    ('disf_sistolica', 'Disf. sistólica'),
+    ('disf_diastolica', 'Disf. diastólica'),
 )
 
 EXAMES_PREVIOS_TE = (
     ('normal', 'Normal'),
+    ('ecg', 'ECG'),
+    ('dor', 'Dor'),
+    ('arritmia', 'Arritmia'),
+    ('baixo_pa', '&#8595 PA'),
 )
 
 EXAMES_PREVIOS_CAT = (
-    ('normal', 'Normal'),
+    ('normal', 'Normal'),    
+    ('da', 'DA'),
+    ('cx', 'CX'),
+    ('cd', 'CD'),
+    ('saf', 'Saf'),
+    ('mam', 'Mam'),
 )
 
 EXAMES_PREVIOS_CM = (
@@ -81,27 +93,6 @@ EXAMES_PREVIOS_CM = (
     ('fibrose', 'Fibrose'),
     ('isq_fib', 'Isq/fib'),
     ('gated_alt', 'Gated alt.'),
-)
-
-EXAMES_PREVIOS_FE = (
-    ('alt_segmentar', 'Alt. segmentar'),
-    ('disf_sistolica', 'Disf. sistólica'),
-    ('disf_diastolica', 'Disf. diastólica'),
-)
-
-EXAMES_PREVIOS_METS = (
-    ('ecg', 'ECG'),
-    ('dor', 'Dor'),
-    ('arritmia', 'Arritmia'),
-    ('baixo_pa', '&#8595 PA'),
-)
-
-EXAMES_PREVIOS_TCE = (
-    ('da', 'DA'),
-    ('cx', 'CX'),
-    ('cd', 'CD'),
-    ('saf', 'Saf'),
-    ('mam', 'Mam'),
 )
 
 MEDICAMENTOS = (

@@ -8,7 +8,7 @@
   {% include 'anamneses/paciente_info.html' with file=True%}
   <class="container-info">
   {% if anamnese_atual%}
-    <h5>Atual</h5>
+    <h5>Anamnese mais recente</h5>
       {% include 'anamneses/anamnese_card.html' with anamnese=anamnese_atual %}
     <hr>
   {% endif %}
