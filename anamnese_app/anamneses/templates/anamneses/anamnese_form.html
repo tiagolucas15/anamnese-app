@@ -7,7 +7,7 @@
 
 <div class="content">
   {% include 'anamneses/paciente_info.html' %}
-    <h2>{{ title }}</h2>
+  <h2>{{ title }}</h2>
   <form action="" method="POST">
 
     {% csrf_token %}
@@ -16,7 +16,7 @@
     {% for form in formset %}
       <div class="name-section"> 
         {{ form.medico_assistente.label}}
-        {{ form.medico_assistente|add_class:"label-not-required" }}
+        {{ form.medico_assistente }}
       </div>
       <div class="name-section">
         {{ form.medico.label}}
@@ -42,15 +42,27 @@
         {{ form.asma.label}}
         {{ form.asma|add_class:"label-not-required" }}
       </div>
+      {% comment %} {% for radio in form.AnamneseForm %}
+          <label for="{{ radio.id_for_label }}">
+              {{ radio.choice_label }}
+              <span class="">{{ radio.tag }}</span>
+          </label>
+      {% endfor %} {% endcomment %}
+      {% comment %} {% for radio in form.tipo_exame %} {% endcomment %}
+        {% comment %} <label class="radio-label" for="{{ radio.id_for_label }}"> {% endcomment %}
+          {% comment %} {{ radio.choice_label }} {% endcomment %}
+          {% comment %} <span>{{ radio.tag }}</span> {% endcomment %}
+        {% comment %} </label> {% endcomment %}
+      {% comment %} {% endfor %} {% endcomment %}
       <div class="name-section"> 
         {{ form.tipo_exame.label}}
         {{ form.tipo_exame|add_class:"label-not-required" }}
       </div>
-      <div class="name-section"> 
+      <div class="name-section" id="cint"> 
         {{ form.cintilografia_adicional.label}}
         {{ form.cintilografia_adicional|add_class:"label-not-required" }}
       </div>
-      <div class="name-section"> 
+      <div class="name-section" id="pesq"> 
         {{ form.viabilidade_adicional.label}}
         {{ form.viabilidade_adicional|add_class:"label-not-required" }}
       </div>
@@ -93,7 +105,7 @@
         </div>
       </div>
       <p>
-      <label class="check-label">HPP</label>
+      <label class="check-label">História Patológica Pregressa</label>
       <div class="form-group">
         <label class="check-sub-label">{{ form.hpp_risco.label }}<hr></label>
         <div class="">
@@ -232,7 +244,7 @@
     {% endfor %}
     <p>
     <button type="submit" class="form-submit">Salvar</button>
-
+    <a class="form-cancel" href="{% url 'paciente' paciente.cns %}">Cancelar</a>
   </form>
 </div>
 

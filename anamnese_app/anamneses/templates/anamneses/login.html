@@ -1,28 +1,29 @@
-{% extends 'anamneses/main.html' %} {% block content %}
+{% extends 'anamneses/main.html' %} {% load widget_tweaks %}
+{% block content %}
 
 <div class="content login">
   <h2>Login</h2>
   <div class="form">
-    <form class="login-form" action="{% url 'login' %}" method="POST">
+    {% for message in messages %}
+      {{ message }}
+    {% endfor %}  
+    <form class="login-form" action="" method="POST">
     {%csrf_token %}
-    {% comment %} {{ form }} {% endcomment %}
       <div class="name-section">
-        {% comment %} <input type="number" name="{{ form.crm }}" autocomplete="off" required /> {% endcomment %}
-        {{ form.crm }}
+        <input type="text" name="username" autocomplete="off" required/>
         <label for="username" class="label-name">
           <span class="content-name">CRM</span>
         </label>
       </div>
       <div class="name-section">
-        {{ form.senha }}
-        {% comment %} <input type="password" name="{{ form.senha }}" autocomplete="off" required /> {% endcomment %}
+        <input type="password" name="password" autocomplete="off" required/>
         <label for="password" class="label-name">
           <span class="content-name">Senha</span>
         </label>
       </div>
       <button type="submit" class="login-submit" formaction="{% url 'login'%}">Salvar</button>
+      <a class="form-cancel" href="{% url 'inicio' %}">Cancelar</a>
     </form>
-    {{ form.errors }}
-  </div>
+    </div>
 </div>
 {% endblock content %}

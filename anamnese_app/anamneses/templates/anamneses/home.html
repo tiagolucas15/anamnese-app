@@ -1,13 +1,13 @@
 {% extends 'anamneses/main.html' %} {% block content %}
 
+{% for message in messages %}
+  {{ message }}
+{% endfor %}
+
 <div class="logo">
   <h2>Sistema de</h2>
   <h1>Anamnese Nuclear</h1>
 </div>
-
-{% for message in messages %}
-  {{ message }}
-{% endfor %}
 
 <div class="search-box">
   <form action="{% url 'inicio' %}" method="GET">

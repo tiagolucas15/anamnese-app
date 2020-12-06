@@ -27,9 +27,26 @@
           </li>
         {% endif %}
       {% endif %}
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'login' %}">Login</a>
-      </li>
+      {% if request.user.is_superuser%}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'cadastrar_medico' %}">Cadastrar Médico</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'upload_ficha' %}">Upload de Ficha</a>
+        </li>
+      {% endif %}
+      {% if request.user.is_authenticated %}
+        <li class="nav-item">
+          <span class="nav-link navbar-user">{{ request.user.medico.nome }} - {{ request.user }}</span>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+        </li>
+      {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'login' %}">Login</a>
+        </li>
+      {% endif %}
       {% comment %}
       <li class="nav-item">
         {% endcomment %} {% comment %} <a class="nav-link" href="">Logout</a> {%

@@ -2,10 +2,13 @@
     <div class="edit-btn-box">
     {% if anamnese.pode_editar %}
         <a class="edit-button" href="{% url 'editar_anamnese' paciente.cns anamnese.pk %}">Editar</a>
-        <h3>Esta anamnese não pode ser editada.</h3>
+    {% else %}
+        <h6>Esta anamnese não pode ser editada.</h6><p>
+        <a class="edit-button disabled-button   " href="">Editar</a>
     {% endif %}
+    
     </div>
-    <div class="info-label">Data: 
+    <div class="info-label">Data:
     <div class="info-data">{{anamnese.data_cadastro|date}}</div>
     </div>
     <div class="info-label">Peso:
