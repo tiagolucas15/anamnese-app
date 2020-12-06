@@ -26,6 +26,13 @@ body {
   font-weight: bold;
 }
 
+.navbar-user {
+  color: #2b5e3a;
+  cursor: default;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
 .navbar-collapse {
   justify-content: flex-end;
 }
@@ -144,11 +151,11 @@ h5 {
   background-color: #eee;
 }
 
-.container-check:hover input ~ .checkmark {
+.container-check:hover input~.checkmark {
   background-color: #c7c7c7;
 }
 
-.container-check input:checked ~ .checkmark {
+.container-check input:checked~.checkmark {
   background-color: #28996e;
 }
 
@@ -158,7 +165,7 @@ h5 {
   display: none;
 }
 
-.container-check input:checked ~ .checkmark:after {
+.container-check input:checked~.checkmark:after {
   display: block;
 }
 
@@ -195,11 +202,11 @@ h5 {
   padding-bottom: 20px;
 }
 
-.check-label + .container-radio-column {
+.check-label+.container-radio-column {
   padding-left: 30px;
 }
 
-.check-label + .container-radio-column + .container-radio-column {
+.check-label+.container-radio-column+.container-radio-column {
   padding-left: 30px;
 }
 
@@ -257,12 +264,12 @@ h5 {
   margin-right: 20px;
 }
 
-.container-radio input[type="radio"]:checked + label {
+.container-radio input[type="radio"]:checked+label {
   background-color: #28996e;
   color: #f7f7f7;
 }
 
-.container-radio input[type="radio"]:checked + label:before {
+.container-radio input[type="radio"]:checked+label:before {
   height: 14px;
   width: 14px;
   border: 8px solid #f7f7f7;
@@ -272,7 +279,8 @@ h5 {
 .form-submit,
 .login-submit,
 .action-btn,
-.edit-button {
+.edit-button,
+.form-cancel {
   background: #28996e;
   border-radius: 5px;
   color: #ffffff;
@@ -280,6 +288,18 @@ h5 {
   float: right;
   margin-top: 15px;
   letter-spacing: 1px;
+  border: none;
+}
+
+.form-cancel {
+  background: #DA6344;
+  border-radius: 5px;
+  color: #ffffff;
+  padding: 8px 16px;
+  float: left;
+  margin-top: 15px;
+  letter-spacing: 1px;
+  text-decoration: none;
 }
 
 .form-submit:hover,
@@ -290,8 +310,21 @@ h5 {
   font-weight: bold;
 }
 
+.form-cancel:hover {
+  box-shadow: 0 0 2px red;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.disabled-button {
+  pointer-events: none;
+  background: #9CAEBC;
+}
+
 .login-submit {
-  float: none;
+  float: right;
 }
 
 .container-column,
@@ -373,30 +406,27 @@ h5 {
   transition: all 0.2s ease;
 }
 
-.name-section input:focus + .label-name .content-name,
-.name-section input:valid + .label-name .content-name {
+.name-section input:focus+.label-name .content-name,
+.name-section input:valid+.label-name .content-name {
   transform: translateY(-100%);
   font-size: 14px;
   color: #28996e;
 }
 
-.name-section input:focus + .label-name::after,
-.name-section input:valid + .label-name::after {
+.name-section input:focus+.label-name::after,
+.name-section input:valid+.label-name::after {
   transform: translateX(0%);
 }
 
-.name-section input:focus + .label-not-required .content-not-required,
-.name-section
-  input[value]:not([value=""])
-  + .label-not-required
-  .content-not-required {
+.name-section input:focus+.label-not-required .content-not-required,
+.name-section input[value]:not([value=""])+.label-not-required .content-not-required {
   transform: translateY(-100%);
   font-size: 14px;
   color: #28996e;
 }
 
-.name-section input:focus + .label-not-required::after,
-.name-section input[value]:not([value=""]) + .label-not-required::after {
+.name-section input:focus+.label-not-required::after,
+.name-section input[value]:not([value=""])+.label-not-required::after {
   transform: translateX(0%);
 }
 
@@ -427,7 +457,7 @@ h5 {
   letter-spacing: 1px;
 }
 
-.logo > h1 {
+.logo>h1 {
   font-size: 50px;
   font-weight: bold;
   letter-spacing: 2px;
@@ -466,7 +496,7 @@ h5 {
 }
 
 .search-box:hover button {
-  border:none;
+  border: none;
   outline: none;
   background: #f7f7f7;
   color: #28996e;

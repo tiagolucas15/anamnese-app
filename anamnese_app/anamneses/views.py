@@ -3,43 +3,75 @@ from django.http import HttpResponse
 from django.forms import inlineformset_factory
 from django.contrib.auth.forms import UserCreationForm
 
+from django.contrib.auth import authenticate, login, logout
+
 from django.contrib import messages
+
+from django.contrib.auth.decorators import login_required
 
 from .models import *
 from .forms import *
 from .serializers import *
+from .decorators import *
 
-# from .filters import PacienteFilter
+
+def loginPage(request):
+    if request.user.is_authenticated:
+        return redirect('inicio')
+    else:
+        form = LoginForm()
+
+        if request.method == 'POST':
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+
+            user = authenticate(request, username=username, password=password)
+
+            if user is not None:
+                login(request, user)
+                return redirect('inicio')
+
+            form = LoginForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('inicio')
+            else:
+                messages.info(request, 'CRM ou Senha incorreto')
+
+        context = {
+            'form': form,
+        }
+
+        return render(request, 'anamneses/login.html', context)
 
 
-def login(request):
-    form = LoginForm()
-    # import ipdb; ipdb.set_trace()
+def logoutUser(request):
+    logout(request)
+    return redirect('login')
 
-    if request.method == 'POST':
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('inicio')
 
-    context = {
-        'form': form,
-    }
-
-    return render(request, 'anamneses/login.html', context)
-
+@usuario_admin
 def cadastrarMedico(request):
     form = CriarUsuarioForm()
-    context = {'form': form}
 
     if request.method == 'POST':
+        crm = request.POST.get('username')
+        nome = request.POST.get('nome')
+
         form = CriarUsuarioForm(request.POST)
         if form.is_valid():
-            form.save()
-            medico = form.cleaned_data.get('nome')
-            messages.success(request, f'Médico(a) {medico} cadastrado com sucesso!')
+            user = form.save()
+            username = form.cleaned_data.get('username')
+            Medico.objects.create(
+                user=user,
+                crm=crm,
+                nome=nome,
+            )
+            messages.success(
+                request, f'Médico(a) {nome} cadastrado com sucesso!')
             return redirect('inicio')
 
+    context = {'form': form}
     return render(request, 'anamneses/medico_form.html', context)
 
 
@@ -49,15 +81,15 @@ def home(request):
 
         if not search_value:
             return render(request, 'anamneses/home.html')
-        
+
         paciente = Paciente.objects.filter(cns=search_value).first()
-        
+
         if paciente:
             return redirect('paciente', search_value)
         else:
             messages.info(request, 'Não há pacientes com esse CNS cadastrado.')
             return redirect('cadastrar_paciente', search_value)
-            
+
 
 def paciente(request, cns):
     paciente = Paciente.objects.get(cns=cns)
@@ -74,13 +106,14 @@ def paciente(request, cns):
 
 def cadastrarPaciente(request, cns=None):
     form = PacienteForm(initial={'cns': cns})
-    
+
     if request.method == 'POST':
         form = PacienteForm(request.POST)
         if form.is_valid():
             paciente = form.save()
             paciente_nome = form.cleaned_data.get('nome')
-            messages.success(request, f'Paciente {paciente_nome} foi cadastrado com sucesso!')
+            messages.success(
+                request, f'Paciente {paciente_nome} foi cadastrado com sucesso!')
             return redirect('paciente', cns=paciente.cns)
 
     context = {
@@ -91,6 +124,7 @@ def cadastrarPaciente(request, cns=None):
     return render(request, 'anamneses/paciente_form.html', context)
 
 
+@login_required(login_url='login')
 def editarPaciente(request, cns):
     paciente = Paciente.objects.get(cns=cns)
     form = PacienteForm(instance=paciente)
@@ -100,7 +134,8 @@ def editarPaciente(request, cns):
         if form.is_valid():
             paciente = form.save()
             paciente_nome = form.cleaned_data.get('nome')
-            messages.success(request, f'O paciente {paciente_nome} foi editado com sucesso!')
+            messages.success(
+                request, f'O paciente {paciente_nome} foi editado com sucesso!')
             return redirect('paciente', cns=paciente.cns)
 
     context = {
@@ -111,6 +146,7 @@ def editarPaciente(request, cns):
     return render(request, 'anamneses/paciente_form.html', context)
 
 
+@login_required(login_url='login')
 def cadastrarAnamnese(request, cns):
     AnamneseFormSet = inlineformset_factory(
         Paciente,
@@ -119,13 +155,14 @@ def cadastrarAnamnese(request, cns):
         extra=1,
     )
     paciente = Paciente.objects.get(cns=cns)
-    
-    formset = AnamneseFormSet(queryset=Anamnese.objects.none(), instance=paciente)
+
+    formset = AnamneseFormSet(
+        queryset=Anamnese.objects.none(),
+        instance=paciente,
+    )
 
     if request.method == 'POST':
         formset = AnamneseFormSet(request.POST, instance=paciente)
-        # serializer = AnamneseSerializer()
-        # serializer.validate_data(request.POST)
         if formset.is_valid():
             formset.save()
             messages.success(
@@ -143,6 +180,7 @@ def cadastrarAnamnese(request, cns):
     return render(request, 'anamneses/anamnese_form.html', context)
 
 
+@login_required(login_url='login')
 def editarAnamnese(request, cns, pk):
     AnamneseFormSet = inlineformset_factory(
         Paciente,
@@ -167,7 +205,6 @@ def editarAnamnese(request, cns, pk):
                 f'Anamnese editada para o paciente {paciente.nome} com sucesso!'
             )
             return redirect('paciente', cns=cns)
-
 
     checked_motivo_exame = anamnese_instance.motivo_exame
     checked_hda = anamnese_instance.hda
@@ -202,3 +239,20 @@ def editarAnamnese(request, cns, pk):
     }
 
     return render(request, 'anamneses/anamnese_form.html', context)
+
+
+@usuario_admin
+def uploadFicha(request):
+    if request.method == 'POST':
+        form = UploadFichaForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Ficha salva!')
+            return redirect('inicio')
+
+    else:
+        form = UploadFichaForm()
+        context = {
+            'form': form,
+        }
+    return render(request, 'anamneses/upload_ficha.html', context)

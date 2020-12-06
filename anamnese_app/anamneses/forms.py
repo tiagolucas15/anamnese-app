@@ -4,6 +4,7 @@ from django import forms
 from django.contrib.auth.models import User
 
 from .models import *
+from .choices import *
 
 
 class PacienteForm(ModelForm):
@@ -13,6 +14,8 @@ class PacienteForm(ModelForm):
 
 
 class AnamneseForm(ModelForm):
+    # tipo_exame = forms.CharField(widget=forms.RadioSelect(choices=TIPO_EXAME))
+
     class Meta:
         model = Anamnese
         fields = '__all__'
@@ -30,3 +33,9 @@ class LoginForm(ModelForm):
     class Meta:
         model = Medico
         fields = ('crm', 'senha',)
+
+
+class UploadFichaForm(forms.ModelForm):
+    class Meta:
+        model = FichaAnamnse
+        fields = '__all__'

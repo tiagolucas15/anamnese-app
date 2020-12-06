@@ -1,5 +1,7 @@
 from datetime import date
 from django.db import models
+from django.contrib.auth.models import User
+
 from .choices import *
 
 from multiselectfield import MultiSelectField
@@ -23,10 +25,10 @@ class Paciente(models.Model):
 
 
 class Medico(models.Model):
+    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     crm = models.CharField(max_length=30, primary_key=True)
     nome = models.CharField(max_length=255, null=False, blank=False)
     data_cadastro = models.DateTimeField(auto_now_add=True, null=True)
-    senha = models.CharField(max_length=50)
 
     def __str__(self):
         return self.nome
@@ -98,6 +100,7 @@ class Anamnese(models.Model):
         null=True,
         blank=True,
         choices=HDA,
+        verbose_name='História da Doença Atual'
     )
     hda_outros = models.CharField(
         max_length=255,
@@ -133,43 +136,43 @@ class Anamnese(models.Model):
         null=True,
         blank=True,
         choices=EXAMES_PREVIOS_ECO,
-        verbose_name='ECO',
+        verbose_name='Ecografia',
     )
     exames_previos_fe = models.CharField(
         max_length=255,
         null=True,
         blank=True,
-        verbose_name='FE'
+        verbose_name='Fração de Ejeção (%)'
     )
     exames_previos_te = MultiSelectField(
         null=True,
         blank=True,
         choices=EXAMES_PREVIOS_TE,
-        verbose_name='TE',
+        verbose_name='Teste Ergométrico',
     )
     exames_previos_mets = models.CharField(
         max_length=255,
         null=True,
         blank=True,
-        verbose_name='METs',
+        verbose_name='MET',
     )
     exames_previos_cat = MultiSelectField(
         null=True,
         blank=True,
         choices=EXAMES_PREVIOS_CAT,
-        verbose_name='CAT',
+        verbose_name='Cateterismo Cardíaco',
     )
     exames_previos_tce = models.CharField(
         max_length=255,
         null=True,
         blank=True,
-        verbose_name='TCE',
+        verbose_name='Tronco de Coroária Esquerda',
     )
     exames_previos_cm = MultiSelectField(
         null=True,
         blank=True,
         choices=EXAMES_PREVIOS_CM,
-        verbose_name='CM',
+        verbose_name='Cintilografia Miocárdica',
     )
     exames_previos_outros = models.CharField(
         max_length=255,
@@ -205,3 +208,15 @@ class Anamnese(models.Model):
     def pode_editar(self):
         tempo_cadastro_dias = (date.today() - self.data_cadastro.date()).days
         return tempo_cadastro_dias <= 1
+
+
+class FichaAnamnse(models.Model):
+
+    tipo = models.CharField(
+        max_length=10,
+        choices=FICHAS,
+    )
+    ficha = models.FileField(upload_to="static/pdfs/")
+
+    def __str__(self):
+        return tipo

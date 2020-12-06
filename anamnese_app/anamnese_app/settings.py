@@ -81,8 +81,12 @@ WSGI_APPLICATION = 'anamnese_app.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'anamnese_app',
+        'USER': 'postgres',
+        'PASSWORD': 'projetotcc',
+        'HOST': 'localhost',
+        'PORT': '5432'
     }
 }
 
@@ -129,5 +133,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
+MEDIA_URL = '/pdfs/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/pdfs')
 
 # django admin user: admin | password: projetotcc

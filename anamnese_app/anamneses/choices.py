@@ -9,20 +9,20 @@ CINTILOGRAFIA_ADICIONAL = (
 )
 
 VIABILIDADE_ADICIONAL = (
-    ('Rep/Redist T', 'Rep/Redist T'),
-    ('Est/Redist/Redist T', 'Est/Redist/Redist T'),
+    ('Rep/Redist T', ' Repouso/Redistribuição tardia'),
+    ('Est/Redist/Redist T', 'Estresse/Redistribuição/Redistribuição tardia'),
 )
 
 MOTIVO_EXAME = (
     ('dor_toracica', 'Dor torácica'),
-    ('pos_sca', 'pós-SCA'),
+    ('pos_sca', 'pós Síndrome Coronariana Aguda'),
     ('alteracao_exame', 'Alteração exame'),
-    ('equiv_anginoso', 'Equiv. anginoso'),
-    ('pos_crvm', 'pós-CRVM'),
+    ('equiv_anginoso', 'Equivalente Anginoso'),
+    ('pos_crvm', 'pós cirurgia de revascularização do miocárdio'),
     ('lesao_coronaria', 'Lesão coronária'),
     ('arritmia', 'Arritmia'),
-    ('pos_ptca', 'pós-PTCA'),
-    ('icc', 'ICC'),
+    ('pos_ptca', 'pós Angioplastia Coronária Transluminal Percutânea'),
+    ('icc', 'Insuficiência Cardíaca Congestiva'),
     ('sincope', 'Síncope'),
     ('risco_cirurgico', 'Risco cirúrgico'),
 )
@@ -39,60 +39,60 @@ HDA = (
 )
 
 HPP_RISCO = (
-    ('has', 'HAS'),
+    ('has', 'Hipertensão Arterial Sistêmica'),
     ('obesidade', 'Obesidade'),
-    ('dm', 'D.M.'),
+    ('dm', 'Diabetes Mellitus'),
     ('dislipidemia', 'Dislipidemia'),
     ('tabagismo', 'Tabagismo'),
-    ('hf', 'HF'),
+    ('hf', 'Histórico Familiar'),
     ('ex_tabagismo', 'Ex-tabagismo'),
     ('menopausa', 'Menopausa'),
 )
 
 HPP_DAC = (
-    ('iam', 'IAM'),
-    ('crvm', 'CRVM'),
-    ('ptca', 'PTCA'),
-    ('cat_alterado', 'CAT alterado'),
+    ('iam', 'Infarto Agudo do Miocárdio'),
+    ('crvm', 'Cirurgia de Revascularização do Miocárdio'),
+    ('ptca', 'Angioplastia Coronária Transluminal Percutânea'),
+    ('cat_alterado', 'Cateterismo Cardíaco alterado'),
 )
 
 HPP_COMORBIDADES = (
-    ('avc', 'AVC'),
-    ('irc', 'IRC'),
-    ('aao', 'AAo'),
+    ('avc', 'Acidente Vascular Cerebral'),
+    ('irc', 'Insuficiência Renal Crônica'),
+    ('aao', 'Aneurisma de Aorta'),
     ('doenca_vascular', 'Doença vascular'),
 )
 
 EXAMES_PREVIOS_ECO = (
     ('normal', 'Normal'),
-    ('alt_segmentar', 'Alt. Segmentar'),
-    ('disf_sistolica', 'Disf. sistólica'),
-    ('disf_diastolica', 'Disf. diastólica'),
+    ('alt_segmentar', 'Alteração Segmentar'),
+    ('disf_sistolica', 'Disfunção Sistólica'),
+    ('disf_diastolica', 'Disfunção diastólicaa'),
 )
 
 EXAMES_PREVIOS_TE = (
     ('normal', 'Normal'),
-    ('ecg', 'ECG'),
+    ('ecg', 'Elétrocardiograma'),
     ('dor', 'Dor'),
     ('arritmia', 'Arritmia'),
-    ('baixo_pa', '&#8595 PA'),
+    ('baixo_pa', '&#8595 Pressão arterial'),
 )
 
 EXAMES_PREVIOS_CAT = (
     ('normal', 'Normal'),    
-    ('da', 'DA'),
-    ('cx', 'CX'),
-    ('cd', 'CD'),
-    ('saf', 'Saf'),
-    ('mam', 'Mam'),
+    ('da', 'Artéria Descendente Anterior'),
+    ('cx', 'Artéria Circunflexa'),
+    ('cd', 'Coronária Direita'),
+    ('saf', 'Safena'),
+    ('mam', 'Artéria Mamária'),
 )
 
 EXAMES_PREVIOS_CM = (
     ('normal', 'Normal'),
     ('isquemia', 'Isquemia'),
     ('fibrose', 'Fibrose'),
-    ('isq_fib', 'Isq/fib'),
-    ('gated_alt', 'Gated alt.'),
+    ('isq_fib', 'Isquemia / Fibrose'),
+    ('gated_alt', 'Gated alterado'),
 )
 
 MEDICAMENTOS = (
@@ -106,3 +106,8 @@ MEDICAMENTOS = (
     ('ieca', 'IECA'),
     ('clopido_rel', 'Clopido.rel'),
 )
+
+FICHAS = {
+    ('estresse', 'Ficha de Estresse'),
+    ('repouso', 'Ficha de Repouso'),
+}
